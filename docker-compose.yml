@@ -1,0 +1,36 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:12.0-alpine
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB-teachbase_dev}
+      POSTGRES_USER: ${POSTGRES_USER-teachbase_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD-teachbase_dev_pass}
+    ports:
+      - "5435:5432"
+
+  web:
+    build: backend
+    image: teachbase_backend
+    volumes:
+      - ./backend:/code
+    environment:
+      SECRET_KEY: ${SECRET_KEY}
+      DEBUG: ${DEBUG-TRUE}
+      DATABASE_URL: ${DATABASE_URL-postgres://teachbase_dev:teachbase_dev_pass@db:5432/teachbase_dev}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS-127.0.0.1,localhost}
+      CLIENT_ID: ${CLIENT_ID}
+      CLIENT_SECRET: ${CLIENT_SECRET}
+      TEACHBASE_API: ${TEACHBASE_API-https://go.teachbase.ru/}
+    ports:
+      - 127.0.0.1:8000:8000
+    depends_on:
+      - db
+    command:
+      bash entrypoint.sh
+
+volumes:
+  db_data:
