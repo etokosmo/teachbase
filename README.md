@@ -19,7 +19,7 @@ Also you can save course in db.
 ## Configurations
 
 * Python version: 3.10.
-* Libraries: check [requirements.txt]().
+* Libraries: check [requirements.txt](https://github.com/etokosmo/teachbase/blob/main/backend/requirements.txt).
 
 ## Set `.env` file
 
