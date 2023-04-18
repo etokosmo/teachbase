@@ -11,7 +11,7 @@ You can:
 - Get sessions of course. `/teachbase/courses/<int:course_id>/course_sessions/`
 - Register user to course' session. `/teachbase/course_sessions/<int:session_id>/register/`
 
-Also you can save course in db.
+Also you can save course in db. `POST` `/teachbase/courses/<int:course_id>/`
 
 - Get list of courses from db. `/courses/`
 - Get detail information of course. `/courses/<int:id>/`
